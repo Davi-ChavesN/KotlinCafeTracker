@@ -19,6 +19,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.rememberScaffoldState
@@ -115,7 +116,7 @@ fun CafeAddScreen(
                             }
                         }
                     }) {
-                        Icon(Icons.Default.Search, contentDescription = "Lista de Cafés")
+                        Icon(Icons.Default.List, contentDescription = "Lista de Cafés")
                     }
                 }
             }

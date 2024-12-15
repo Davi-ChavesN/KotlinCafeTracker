@@ -21,8 +21,10 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -48,14 +50,16 @@ fun CafeListScreen(
     val scope = rememberCoroutineScope()
 
     var cafes by remember { mutableStateOf<List<Cafe>>(emptyList()) }
+    var cafesOrdemNormal by remember { mutableStateOf<List<Cafe>>(emptyList()) }
     var isError by remember { mutableStateOf(false) }
+    var isSortedBySabor by remember { mutableStateOf(false) }
 
     val cafeDAO = CafeDAO()
 
     fun loadCafes() {
         cafeDAO.buscarCafes(
             onDataChange = { fetchedCafes ->
-                cafes = fetchedCafes
+                cafes = fetchedCafes.sortedBy { it.nome }
                 isError = false
             },
             onError = { error ->
@@ -64,6 +68,8 @@ fun CafeListScreen(
             }
         )
     }
+
+    cafesOrdemNormal = cafes
 
     LaunchedEffect(Unit) {
         loadCafes()
@@ -83,6 +89,18 @@ fun CafeListScreen(
                         }
                     }) {
                         Icon(Icons.Default.Menu, contentDescription = "Menu")
+                    }
+                },
+                actions = {
+                    IconButton(onClick = {
+                        isSortedBySabor = !isSortedBySabor
+                        cafes = if (isSortedBySabor) {
+                            cafes.sortedBy { it.sabor }.asReversed()
+                        } else {
+                            cafes.sortedBy { it.nome }
+                        }
+                    }) {
+                        Icon(Icons.Default.Star, contentDescription = "Ordenar por Sabor")
                     }
                 }
             )
@@ -113,7 +131,7 @@ fun CafeListScreen(
                             }
                         }
                     }) {
-                        Icon(Icons.Default.Search, contentDescription = "Lista de Cafés")
+                        Icon(Icons.Default.List, contentDescription = "Lista de Cafés")
                     }
                 }
             }

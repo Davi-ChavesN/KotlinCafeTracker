@@ -21,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.rememberScaffoldState
@@ -125,7 +126,7 @@ fun CafeEditScreen(
                             }
                         }
                     }) {
-                        Icon(Icons.Default.Search, contentDescription = "Lista de Cafés")
+                        Icon(Icons.Default.List, contentDescription = "Lista de Cafés")
                     }
                 }
             }

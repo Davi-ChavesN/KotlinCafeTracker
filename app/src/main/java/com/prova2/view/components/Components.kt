@@ -2,10 +2,13 @@ package com.prova2.view.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.OutlinedTextField
@@ -67,6 +70,33 @@ fun NumberPicker(
                     fontWeight = if (number == value) FontWeight.Bold else FontWeight.Normal, // Destacar o número selecionado
                     fontSize = 20.sp // Tamanho de fonte maior
                 )
+            )
+        }
+    }
+}
+
+// ------------------------ CARDS ------------------------
+@Composable
+fun CardItem(title: String, content: String) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        elevation = 4.dp
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = title,
+                style = androidx.compose.material.MaterialTheme.typography.h6
+            )
+            Text(
+                text = content,
+                style = androidx.compose.material.MaterialTheme.typography.body1
             )
         }
     }
